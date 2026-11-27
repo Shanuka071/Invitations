@@ -209,9 +209,9 @@ body.lock{overflow:hidden}
 <section class="sec" id="gallery"><div class="in">
   <p class="lbl rv">Moments</p><div class="ttl rv">OUR <em>GALLERY</em></div><div class="dia"><i>◆</i></div>
   <div class="gal rv">
-    <div><img src="Image5.jpg" alt="Tharindu and Thilakshi, photo 1" loading="lazy"></div>
-    <div><img src="Image6.jpg" alt="Tharindu and Thilakshi, photo 2" loading="lazy"></div>
-    <div><img src="Image7.jpg" alt="Tharindu and Thilakshi, photo 3" loading="lazy"></div>
+    <div><img src="Image5.jpeg" alt="Tharindu and Thilakshi, photo 1" loading="lazy"></div>
+    <div><img src="Image6.jpeg" alt="Tharindu and Thilakshi, photo 2" loading="lazy"></div>
+    <div><img src="Image7.jpeg" alt="Tharindu and Thilakshi, photo 3" loading="lazy"></div>
     <div><img src="Image8.jpg" alt="Tharindu and Thilakshi, photo 4" loading="lazy"></div>
   </div>
   <p class="sm" style="margin-top:1.4rem">Our special moments, kept forever.</p>
@@ -236,7 +236,7 @@ body.lock{overflow:hidden}
     <div class="nm" style="margin-top:.8rem">T<span class="scr" style="font-size:2.2rem;letter-spacing:0">&amp;</span>T</div><div class="nm" style="font-size:1.2rem;letter-spacing:.14em">THARINDU &amp; THILAKSHI</div>
     <p class="sm" style="margin:1rem 0 .2rem" id="forGuest">Kindly reply by 15 January 2027</p>
     <a class="btn dk" id="wa" target="_blank" rel="noopener" href="#">Accept on WhatsApp</a><br>
-    <a class="btn" href="tel:+94771234567">Call groom</a><a class="btn" href="tel:+94712345678">Call bride</a><br>
+    <a class="btn" id="callGroom" href="#">Call groom</a><a class="btn" id="callBride" href="#">Call bride</a><br>
     <button class="btn" id="bless" type="button">Send blessings</button>
   </div>
 </div></section>
@@ -251,7 +251,15 @@ body.lock{overflow:hidden}
 <script>
 (function(){
   // Edit these details to personalise the invitation
-  var C={groom:'Tharindu',bride:'Thilakshi',date:'2027-01-29T08:00:00+05:30',phone:'+94702324889',phone2:'+94778265225',whatsapp:'+94702324889'};
+  // Phone numbers: digits only, with country code (94) and no + or spaces
+  var C={
+    groom:'Tharindu',
+    bride:'Thilakshi',
+    date:'2027-01-29T08:00:00+05:30',
+    groomPhone:'94702324889',   // Groom: 0702324889
+    bridePhone:'94778265225',   // Bride: +94 77 826 5225
+    whatsapp:'94702324889'      // WhatsApp replies go to the groom
+  };
   var body=document.body,doc=document.documentElement;
   // embossed floral paper (ivory) and its gilded twin (gold), generated once as repeating backgrounds
   function mk(c){
@@ -286,7 +294,10 @@ body.lock{overflow:hidden}
     var v=[['Days',Math.floor(s/86400)],['Hours',Math.floor(s%86400/3600)],['Minutes',Math.floor(s%3600/60)],['Seconds',s%60]];
     box.innerHTML=v.map(function(x){return '<div><b>'+x[1]+'</b><span>'+x[0]+'</span></div>'}).join('')}
   tick();setInterval(tick,1000);
-  document.getElementById('wa').href='https://wa.me/'+C.phone+'?text='+encodeURIComponent('Hello! '+(guest?guest+' here. ':'')+'I will be attending '+C.groom+' & '+C.bride+'’s wedding.');
+  // WhatsApp and call buttons use the numbers set in C above
+  document.getElementById('wa').href='https://wa.me/'+C.whatsapp+'?text='+encodeURIComponent('Hello! '+(guest?guest+' here. ':'')+'I will be attending '+C.groom+' & '+C.bride+'’s wedding.');
+  document.getElementById('callGroom').href='tel:+'+C.groomPhone;
+  document.getElementById('callBride').href='tel:+'+C.bridePhone;
   // petals
   function rain(n){for(var i=0;i<n;i++){(function(i){setTimeout(function(){var p=document.createElement('i');p.className='petal';p.style.left=Math.random()*100+'vw';
     p.style.setProperty('--dx',(Math.random()*160-80)+'px');p.style.setProperty('--r',(Math.random()*720-360)+'deg');p.style.animationDuration=(5+Math.random()*5)+'s';
